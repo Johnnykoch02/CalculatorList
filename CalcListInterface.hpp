@@ -18,8 +18,6 @@ public:
     virtual void newOperation(FUNCTIONS func,double operand) = 0;
     virtual void removeLastOperation() = 0;
     virtual std::string toString(unsigned short precision) = 0;
-
-    
 };
 
 #endif /* CALCLISTINTERFACE_H */

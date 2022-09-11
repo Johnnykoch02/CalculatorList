@@ -30,7 +30,7 @@ CalcList::~CalcList() {
  * @param copy ptr to the list to be copied
  */
 CalcList::CalcList(CalcList* const copy) : CalcList::CalcList() {
-    this->l = copy->length();
+    this->l = copy->l;
     /* Copy In all Data from the Nodes */
     Node<Operation>* our_prev = nullptr;
     Node<Operation>* our_curr = this->head;
@@ -54,8 +54,8 @@ CalcList::CalcList(CalcList* const copy) : CalcList::CalcList() {
  * Copy constructor for the Calc List
  * @param copy reference to the list to be copied
  */
-CalcList::CalcList(CalcList& copy) {
-    this->l = copy.length();
+CalcList::CalcList(const CalcList& copy): CalcList::CalcList() {
+    this->l = copy.l;
     /* Copy In all Data from the Nodes */
     Node<Operation>* our_prev = nullptr;
     Node<Operation>* our_curr;

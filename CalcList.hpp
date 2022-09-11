@@ -13,7 +13,7 @@ class Node {
   public:
     Node<T> *prev;
     Node<T> *next;
-  Node(){
+  Node() {
     this->prev = nullptr;
     this->next = nullptr;
   }
@@ -75,8 +75,6 @@ struct Operation {
 #ifndef CALCLIST_H
 #define CALCLIST_H
 
-
-
 class CalcList : public CalcListInterface {  
     
     protected:
@@ -98,7 +96,7 @@ class CalcList : public CalcListInterface {
     CalcList();
     ~CalcList();
     CalcList(CalcList* const copy);
-    CalcList(CalcList& copy);
+    CalcList(const +CalcList& copy);
     
     /* Public Variables */
 
@@ -108,14 +106,13 @@ class CalcList : public CalcListInterface {
     void removeLastOperation();
     std::string toString(unsigned short precision);
     size_t length();
-
   
 };
 
 #endif
 
-
-
+#ifndef NODESTACK_H
+#define NODESTACK_H
 
 template <class T>
 class NodeStack {
@@ -170,3 +167,5 @@ class NodeStack {
     }
 
 };
+
+#endif
