@@ -13,7 +13,10 @@ class Node {
   public:
     Node<T> *prev;
     Node<T> *next;
-  Node(){}
+  Node(){
+    this->prev = nullptr;
+    this->next = nullptr;
+  }
 
   ~Node() {
     delete data; delete prev; delete next;
@@ -26,9 +29,9 @@ class Node {
 }
 
   Node(T *data) {
-    this->data = data;
     this->prev = nullptr;
     this->next = nullptr;
+    this->data = data;
 }
 
   Node* getNext() { return  this->next; }

@@ -2,6 +2,10 @@
 
 /* Constructors */
 
+/**
+ * @brief Construct a new Calc List:: Calc List object
+ * 
+ */
 CalcList::CalcList() {
     this->pTotal=0;
     this->l=0;
@@ -9,6 +13,12 @@ CalcList::CalcList() {
     this->tail = nullptr;
 }
 
+
+/**
+ * @brief Construct a new Calc List:: Calc List object
+ *  Copy constructor for the Calc List
+ * @param copy ptr to the list to be copied
+ */
 CalcList::CalcList(CalcList* const copy) : CalcList::CalcList() {
     this->l = copy->length();
     /* Copy In all Data from the Nodes */
@@ -29,6 +39,11 @@ CalcList::CalcList(CalcList* const copy) : CalcList::CalcList() {
     }
 }
 
+/**
+ * @brief Construct a new Calc List:: Calc List object
+ * Copy constructor for the Calc List
+ * @param copy reference to the list to be copied
+ */
 CalcList::CalcList(CalcList& copy) {
     this->l = copy.length();
     /* Copy In all Data from the Nodes */
@@ -50,10 +65,21 @@ CalcList::CalcList(CalcList& copy) {
 }
 
 /* Public Functions */
+/**
+ * @brief Gives back calculated total
+ * 
+ * @return double total
+ */
 double CalcList::total() {
     return this->pTotal;
 }
 
+/**
+ * @brief Adds a new Operation into our List
+ * 
+ * @param func The function being applied
+ * @param operand the Value of which to perform the function
+ */
 void CalcList::newOperation(FUNCTIONS func,double operand) {
     /* This logic adds in a new data point into the right position in the list and updates our total. */
     struct Operation* new_data = new Operation(func, operand);//;new_data->function=func;new_data->operand=operand;
@@ -77,6 +103,10 @@ void CalcList::newOperation(FUNCTIONS func,double operand) {
     this->updateTotal();
 }
 
+/**
+ * @brief removes the previously added Operation in the List
+ * 
+ */
 void CalcList::removeLastOperation() {
     /* Change the Tail, and free the old Tails memory. Reflect this change in the total. */
     Node<Operation>* old_tail = this->tail;
@@ -86,6 +116,12 @@ void CalcList::removeLastOperation() {
     delete old_tail;
 }
 
+/**
+ * @brief Converts the list into a string and returns the reverse order of the operations
+ * 
+ * @param precision floating point rounding decimal places. 
+ * @return std::string the reverse representation of the data.
+ */
 std::string CalcList::toString(unsigned short precision) {
     /* Initialize Variables */
     std::string returnString = "";
@@ -141,6 +177,7 @@ std::string CalcList::toString(unsigned short precision) {
         reverser.push(s.str());
         curr=curr->next;
     }
+    /* Pull the data from the stack into the return String */
     while( !(reverser.isEmpty()) ) {
         std::string* popString = reverser.pop()->getData();
         returnString+= *popString;
@@ -166,9 +203,10 @@ void CalcList::link(Node<Operation>* a, Node<Operation>* b) {
 
 
 void CalcList::updateTotal() {
+    /* Start from Begginging of the List */
     Node<Operation>* curr = this->head;
     while (nullptr != curr) { 
-
+        std::cout << curr << std::endl;
         /* Determine which function to apply the operand by */
         Operation* curr_op = curr->getData();
         curr=curr->next;
