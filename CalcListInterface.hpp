@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iomanip>
+#include <iostream>
 #include <sstream>
 
 // Enum that contains all the arithmetic functions needed for newOperation

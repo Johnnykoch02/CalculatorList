@@ -25,7 +25,7 @@ CalcList::CalcList(CalcList* const copy) : CalcList::CalcList() {
     Node<Operation>* our_prev = nullptr;
     Node<Operation>* our_curr = this->head;
     Node<Operation>* copy_curr = copy->head;
-    while (copy_curr) {
+    while (nullptr != copy_curr) {
         our_curr = new Node<Operation>;
         our_curr->setData(copy_curr->getData());
         link(our_prev, our_curr);
@@ -33,7 +33,7 @@ CalcList::CalcList(CalcList* const copy) : CalcList::CalcList() {
         copy_curr = copy_curr->next;
     /* Back Propagation */
     this->tail = our_curr;
-    while (our_curr->prev) our_curr= our_curr->prev;
+    while (nullptr != our_curr->prev) our_curr= our_curr->prev;
     this->head = our_curr;
     updateTotal();
     }
@@ -50,7 +50,7 @@ CalcList::CalcList(CalcList& copy) {
     Node<Operation>* our_prev = nullptr;
     Node<Operation>* our_curr;
     Node<Operation>* copy_curr = copy.head;
-    while (copy_curr) {
+    while (nullptr != copy_curr) {
         our_curr = new Node<Operation>;
         our_curr->setData(copy_curr->getData());
         link(our_prev, our_curr);
@@ -59,7 +59,7 @@ CalcList::CalcList(CalcList& copy) {
     }
     /* Back Propagation */
     this->tail = our_curr;
-    while (our_curr->prev) our_curr= our_curr->prev;
+    while (nullptr != our_curr->prev) our_curr= our_curr->prev;
     this->head = our_curr;
     updateTotal();
 }
@@ -81,13 +81,18 @@ double CalcList::total() {
  * @param operand the Value of which to perform the function
  */
 void CalcList::newOperation(FUNCTIONS func,double operand) {
+    if(func == DIVISION && operand == 0) {
+        throw std::runtime_error("Error: Cannot divde by Zero...");
+        return;
+    }
     /* This logic adds in a new data point into the right position in the list and updates our total. */
     struct Operation* new_data = new Operation(func, operand);//;new_data->function=func;new_data->operand=operand;
     if (nullptr == this->head) { /* n < 1 */
         this->head = new Node<Operation>;
+        this->tail = this->head;
         this->head->setData(new_data);
     }
-    else if(nullptr == this->tail) { /* n < 2*/
+    else if(this->head == this->tail) { /* n < 2*/
         this->tail = new Node<Operation>;
         this->tail->setData(new_data);
         link(this->head, this->tail);
@@ -104,15 +109,27 @@ void CalcList::newOperation(FUNCTIONS func,double operand) {
 }
 
 /**
- * @brief removes the previously added Operation in the List
- * 
+ * @brief 
+ * @throw runtime error while removing an operation from an empty list.
  */
 void CalcList::removeLastOperation() {
     /* Change the Tail, and free the old Tails memory. Reflect this change in the total. */
+    if(this->l == 0) {
+        throw std::runtime_error("Error: Cannot remove Operation from empty list...");
+        return;
+    }
     Node<Operation>* old_tail = this->tail;
-    this->tail = old_tail->prev;
-    link(this->tail, nullptr);
-    this->updateTotal();
+    if ( nullptr != old_tail && old_tail->hasPrev() ) {
+        this->tail = old_tail->prev;
+        link(this->tail, nullptr);
+        this->l--;
+        this->updateTotal();
+    }
+    else { /* Single Node List */
+        this->tail = nullptr; this->head = nullptr;
+        this->l = 0;
+        this->pTotal = 0;
+    }
     delete old_tail;
 }
 
@@ -175,7 +192,6 @@ std::string CalcList::toString(unsigned short precision) {
         /* Push the new stream data to the stack */
 
         reverser.push(s.str());
-        curr=curr->next;
     }
     /* Pull the data from the stack into the return String */
     while( !(reverser.isEmpty()) ) {
@@ -206,7 +222,6 @@ void CalcList::updateTotal() {
     /* Start from Begginging of the List */
     Node<Operation>* curr = this->head;
     while (nullptr != curr) { 
-        std::cout << curr << std::endl;
         /* Determine which function to apply the operand by */
         Operation* curr_op = curr->getData();
         curr=curr->next;

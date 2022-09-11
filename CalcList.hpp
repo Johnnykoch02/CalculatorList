@@ -19,7 +19,7 @@ class Node {
   }
 
   ~Node() {
-    delete data; delete prev; delete next;
+    delete data; //delete prev; delete next;
   }
 
   Node(T *data, Node<T> *p, Node<T> *n) {
@@ -124,13 +124,19 @@ class NodeStack {
     unsigned int length;
 
  public:
-    NodeStack() {}
+    NodeStack() {
+      this->top = nullptr;
+      this->length = 0;
+    }
     ~NodeStack(){ delete this->top; }
 
     void push(T data) {
         T* dataPtr = new T(data);
         Node<T>* node = new Node<T>(dataPtr);
-        this->top->next = node;
+        if (!this->isEmpty()) {
+          this->top->next = node;
+          node->prev = this->top;
+        }
         if (node) {
             this->top = node;
             this->length++;
@@ -149,7 +155,7 @@ class NodeStack {
     }
     
     bool isEmpty() {
-        return nullptr !=this->top;
+        return nullptr == this->top;
     }
 
 };
