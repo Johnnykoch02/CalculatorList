@@ -96,6 +96,7 @@ class CalcList : public CalcListInterface {
     public:
     /* Public Contstructors & Destructors */
     CalcList();
+    ~CalcList();
     CalcList(CalcList* const copy);
     CalcList(CalcList& copy);
     
@@ -124,11 +125,21 @@ class NodeStack {
     unsigned int length;
 
  public:
+    /* Initialize Stack */
     NodeStack() {
       this->top = nullptr;
       this->length = 0;
     }
-    ~NodeStack(){ delete this->top; }
+    /* Removes Node Stack */
+    ~NodeStack() { 
+      Node<T>* stackPtr = this->top;
+      Node<T>* above;
+      while (nullptr != stackPtr) {
+        above = stackPtr;
+        stackPtr = stackPtr->prev;
+        if (nullptr!= above) delete above;
+      }
+    }
 
     void push(T data) {
         T* dataPtr = new T(data);

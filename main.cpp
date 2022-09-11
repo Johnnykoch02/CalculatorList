@@ -31,7 +31,6 @@ int main(void) {
     } catch(const std::exception& e) {
         std::cout << e.what() << std::endl;
     }
-    
     try {
         calc.newOperation(SUBTRACTION, 10);
         std::cout << "Total: " << calc.total() << std::endl;
@@ -48,12 +47,13 @@ int main(void) {
 
     calc.newOperation(ADDITION, 10);
     calc.newOperation(ADDITION, 20);
-    calc.newOperation(SUBTRACTION, 20);
+    calc.newOperation(SUBTRACTION, 20.2);
     calc.removeLastOperation();
-    calc.newOperation(MULTIPLICATION, 1);
+    calc.newOperation(MULTIPLICATION, 1.782);
     std::cout << "O/\n";
-    std::string output = calc.toString(1);
+    std::string output = calc.toString(3);
     std::cout << output << std::endl;
 
+    std::cout << "Total: " << calc.total() << std::endl;  
 
 }

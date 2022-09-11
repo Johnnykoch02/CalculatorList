@@ -13,6 +13,16 @@ CalcList::CalcList() {
     this->tail = nullptr;
 }
 
+CalcList::~CalcList() {
+    Node<Operation>* listPtr = this->tail;
+    Node<Operation>* above;
+    while (nullptr != listPtr) {
+        above = listPtr;
+        listPtr = listPtr->prev;
+        if (nullptr!= above) delete above;
+    }
+}
+
 
 /**
  * @brief Construct a new Calc List:: Calc List object
@@ -221,6 +231,7 @@ void CalcList::link(Node<Operation>* a, Node<Operation>* b) {
 void CalcList::updateTotal() {
     /* Start from Begginging of the List */
     Node<Operation>* curr = this->head;
+    this->pTotal = 0;
     while (nullptr != curr) { 
         /* Determine which function to apply the operand by */
         Operation* curr_op = curr->getData();
