@@ -77,14 +77,12 @@ struct Operation {
 #ifndef CALCLIST_H
 #define CALCLIST_H
 
-<<<<<<< Updated upstream
-=======
+
 /**
  * @brief Implementation of Basic Arithmetic Function that are being performed sequentially
  * 
  */
 
->>>>>>> Stashed changes
 class CalcList : public CalcListInterface {  
     
     protected:
@@ -106,7 +104,7 @@ class CalcList : public CalcListInterface {
     CalcList();
     ~CalcList();
     CalcList(CalcList* const copy);
-    CalcList(const +CalcList& copy);
+    CalcList(const CalcList& copy);
     
     /* Public Variables */
 
@@ -121,17 +119,14 @@ class CalcList : public CalcListInterface {
 
 #endif
 
-<<<<<<< Updated upstream
 #ifndef NODESTACK_H
 #define NODESTACK_H
-=======
 /**
  * @brief node stack template class intialization and definition
  * 
  * @tparam T 
  */
 
->>>>>>> Stashed changes
 
 template <class T>
 class NodeStack {
