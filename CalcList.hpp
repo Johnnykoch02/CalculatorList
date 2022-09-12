@@ -190,7 +190,7 @@ class NodeStack {
     Node<T>* pop() {
         Node<T> * returnNode = this->top;
         this->top = this->top->prev;
-        this->top->next = nullptr;
+        // this->top->next = nullptr;
         length--;
         return returnNode;
     }
