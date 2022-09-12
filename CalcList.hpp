@@ -5,6 +5,8 @@ using namespace std;
 #ifndef Node_h
 #define Node_h
 
+// Template Class for Node Storage Object
+
 template <class T>
 class Node {
   private:
@@ -75,6 +77,14 @@ struct Operation {
 #ifndef CALCLIST_H
 #define CALCLIST_H
 
+<<<<<<< Updated upstream
+=======
+/**
+ * @brief Implementation of Basic Arithmetic Function that are being performed sequentially
+ * 
+ */
+
+>>>>>>> Stashed changes
 class CalcList : public CalcListInterface {  
     
     protected:
@@ -111,8 +121,17 @@ class CalcList : public CalcListInterface {
 
 #endif
 
+<<<<<<< Updated upstream
 #ifndef NODESTACK_H
 #define NODESTACK_H
+=======
+/**
+ * @brief node stack template class intialization and definition
+ * 
+ * @tparam T 
+ */
+
+>>>>>>> Stashed changes
 
 template <class T>
 class NodeStack {
@@ -138,6 +157,12 @@ class NodeStack {
       }
     }
 
+    /**
+     * @brief method to add an element to the top of the stack
+     * 
+     * @param data 
+     */
+
     void push(T data) {
         T* dataPtr = new T(data);
         Node<T>* node = new Node<T>(dataPtr);
@@ -151,17 +176,37 @@ class NodeStack {
         }
     }
     
+    /**
+     * @brief to view the element at the top of the stack
+     * 
+     * @return Node<T>* 
+     */
+
     Node<T>* peek() {
         return this->top;
     }
 
+    /**
+     * @brief to remove an element from the top of the stack
+     * 
+     * @return Node<T>* 
+     */
+
     Node<T>* pop() {
         Node<T> * returnNode = this->top;
         this->top = this->top->prev;
+        this->top->next = nullptr;
         length--;
         return returnNode;
     }
     
+    /**
+     * @brief to verify whether the top fo the stack is empty
+     * 
+     * @return true 
+     * @return false 
+     */
+
     bool isEmpty() {
         return nullptr == this->top;
     }

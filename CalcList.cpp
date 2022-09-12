@@ -6,12 +6,18 @@
  * @brief Construct a new Calc List:: Calc List object
  * 
  */
+
 CalcList::CalcList() {
     this->pTotal=0;
     this->l=0;
     this->head = nullptr;
     this->tail = nullptr;
 }
+
+/**
+ * @brief Destroy the Calc List:: Calc List object
+ * 
+ */
 
 CalcList::~CalcList() {
     Node<Operation>* listPtr = this->tail;
@@ -213,11 +219,22 @@ std::string CalcList::toString(unsigned short precision) {
 
 }
 
+/**
+ * @brief return the length of the linked list currently being pointed to
+ * 
+ * @return size_t 
+ */
+
 size_t CalcList::length() {
     return this->l;
 }
 
-
+/**
+ * @brief to connect two nodes 
+ * 
+ * @param a 
+ * @param b 
+ */
 
 void CalcList::link(Node<Operation>* a, Node<Operation>* b) {
     /*This process puts node a's next to b, and b's prev to a*/
@@ -226,6 +243,11 @@ void CalcList::link(Node<Operation>* a, Node<Operation>* b) {
     if(nullptr != b)
         b->prev = a;
 }
+
+/**
+ * @brief Arithmetic Logic Implementation
+ * 
+ */
 
 
 void CalcList::updateTotal() {
