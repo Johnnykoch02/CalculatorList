@@ -3,6 +3,11 @@
 #include "CalcList.hpp"
 // #include <cmath>
 
+/**
+ * Jonathan Koch U25381998
+ * Krish Veera U87325929
+ */
+
 int main(void) {
     CalcList calc;
     std::cout << "Total: " << calc.total() << std::endl;
